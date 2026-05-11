@@ -26,6 +26,15 @@ export const getKrsByStudentAndYear = async (studentId, academicYearId) => {
   return result.rows[0] || null;
 };
 
+export const getAcademicYearById = async (academicYearId) => {
+  const result = await pool.query(
+    "SELECT id, is_active FROM academic_years WHERE id = $1",
+    [academicYearId],
+  );
+
+  return result.rows[0] || null;
+};
+
 export const getCurrentKrs = async (studentId) => {
   const result = await pool.query(
     `SELECT k.*, ay.year, ay.semester
@@ -72,6 +81,15 @@ export const removeClassFromKrs = async (
   );
 
   return true;
+};
+
+export const getKrsDetailById = async (krsDetailId) => {
+  const result = await pool.query(
+    "SELECT id, krs_id, class_id FROM krs_details WHERE id = $1",
+    [krsDetailId],
+  );
+
+  return result.rows[0] || null;
 };
 
 export const submitKrs = async (krsId, client = null) => {
@@ -183,4 +201,32 @@ export const getPendingKrsForLecturer = async (lecturerId) => {
   );
 
   return result.rows;
+};
+
+export const getAllPendingKrs = async () => {
+  const result = await pool.query(
+    `SELECT DISTINCT k.*, s.student_id as nim, u.name as student_name, ay.year, ay.semester
+     FROM krs k
+     JOIN students s ON k.student_id = s.id
+     JOIN users u ON s.user_id = u.id
+     JOIN academic_years ay ON k.academic_year_id = ay.id
+     WHERE k.status = 'submitted'
+     ORDER BY k.submitted_at`,
+  );
+
+  return result.rows;
+};
+
+export const canLecturerApproveKrs = async (lecturerUserId, krsId) => {
+  const result = await pool.query(
+    `SELECT 1
+     FROM lecturers l
+     JOIN classes c ON c.lecturer_id = l.id
+     JOIN krs_details kd ON kd.class_id = c.id
+     WHERE l.user_id = $1 AND kd.krs_id = $2
+     LIMIT 1`,
+    [lecturerUserId, krsId],
+  );
+
+  return result.rows.length > 0;
 };

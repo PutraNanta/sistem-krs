@@ -13,6 +13,11 @@ export const removeClassFromKrsSchema = z.object({
 });
 
 export const approveKrsSchema = z.object({
-  status: z.enum(["approved", "rejected"]),
-  rejectionReason: z.string().optional(),
+  status: z.literal("approved").default("approved"),
+});
+
+export const rejectKrsSchema = z.object({
+  rejectionReason: z
+    .string()
+    .min(5, "Rejection reason must be at least 5 characters"),
 });

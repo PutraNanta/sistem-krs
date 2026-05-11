@@ -19,3 +19,12 @@ export const getStudentIdByUserId = async (userId) => {
   );
   return result.rows[0]?.id || null;
 };
+
+export const getStudyProgramIdByStudentId = async (studentId) => {
+  const result = await pool.query(
+    "SELECT study_program_id FROM students WHERE id = $1",
+    [studentId],
+  );
+
+  return result.rows[0]?.study_program_id || null;
+};

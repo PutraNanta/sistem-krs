@@ -56,5 +56,11 @@ router.post(
   roleMiddleware(["lecturer", "admin"]),
   krsController.approveKrs,
 );
+router.post(
+  "/:krsId/reject",
+  authMiddleware,
+  roleMiddleware(["lecturer", "admin"]),
+  krsController.rejectKrs,
+);
 
 export default router;

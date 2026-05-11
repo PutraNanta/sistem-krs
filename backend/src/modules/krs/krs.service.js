@@ -1,9 +1,18 @@
 import pool from "../../config/db.js";
 import * as krsRepository from "./krs.repository.js";
 import * as krsValidator from "./krs.validator.js";
-import * as studentRepository from "../students/student.repository.js";
 
 export const createKrsService = async (studentId, academicYearId) => {
+  const academicYear = await krsRepository.getAcademicYearById(academicYearId);
+
+  if (!academicYear) {
+    throw new Error("Academic year not found");
+  }
+
+  if (!academicYear.is_active) {
+    throw new Error("KRS can only be created for active academic year");
+  }
+
   // Check if student already has KRS for this academic year
   const existingKrs = await krsRepository.getKrsByStudentAndYear(
     studentId,
@@ -56,17 +65,14 @@ export const addClassToKrsService = async (krsId, classId) => {
   }
 };
 
-export const removeClassFromKrsService = async (krsDetailId, classId) => {
-  const krsDetail = await pool.query(
-    "SELECT krs_id FROM krs_details WHERE id = $1",
-    [krsDetailId],
-  );
+export const removeClassFromKrsService = async (krsDetailId) => {
+  const krsDetail = await krsRepository.getKrsDetailById(krsDetailId);
 
-  if (krsDetail.rows.length === 0) {
+  if (!krsDetail) {
     throw new Error("KRS detail not found");
   }
 
-  const krsId = krsDetail.rows[0].krs_id;
+  const { krs_id: krsId, class_id: classId } = krsDetail;
 
   // Validate KRS is editable
   await krsValidator.validateKrsEditable(krsId);
@@ -156,6 +162,7 @@ export const getKrsHistoryService = async (studentId) => {
 export const approveKrsService = async (
   krsId,
   approvedById,
+  approvedByRole,
   status,
   rejectionReason = null,
 ) => {
@@ -167,6 +174,17 @@ export const approveKrsService = async (
 
   if (krs.status !== "submitted") {
     throw new Error("Only submitted KRS can be approved/rejected");
+  }
+
+  if (approvedByRole === "lecturer") {
+    const canApprove = await krsRepository.canLecturerApproveKrs(
+      approvedById,
+      krsId,
+    );
+
+    if (!canApprove) {
+      throw new Error("Lecturer can only approve/reject assigned students");
+    }
   }
 
   // Use transaction for approval
@@ -196,8 +214,11 @@ export const approveKrsService = async (
   }
 };
 
-export const getPendingKrsService = async (lecturerId) => {
-  const pendingKrs = await krsRepository.getPendingKrsForLecturer(lecturerId);
+export const getPendingKrsService = async (lecturerId, role) => {
+  const pendingKrs =
+    role === "admin"
+      ? await krsRepository.getAllPendingKrs()
+      : await krsRepository.getPendingKrsForLecturer(lecturerId);
 
   return Promise.all(
     pendingKrs.map(async (krs) => {

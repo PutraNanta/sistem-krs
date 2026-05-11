@@ -3,9 +3,11 @@ import {
   addClassToKrsSchema,
   removeClassFromKrsSchema,
   approveKrsSchema,
+  rejectKrsSchema,
 } from "./krs.validation.js";
 import * as krsService from "./krs.service.js";
 import * as studentRepository from "../students/student.repository.js";
+import * as lecturerRepository from "../lecturers/lecturer.repository.js";
 import { successResponse, errorResponse } from "../../utils/response.js";
 
 export const createKrs = async (req, res) => {
@@ -46,12 +48,9 @@ export const addClassToKrs = async (req, res) => {
 
 export const removeClassFromKrs = async (req, res) => {
   try {
-    const { removeClassFromKrsSchema: schema } =
-      await import("./krs.validation.js");
-    const { krsDetailId } = req.params;
-    const { classId } = req.body;
+    const { krsDetailId } = removeClassFromKrsSchema.parse(req.params);
 
-    await krsService.removeClassFromKrsService(krsDetailId, classId);
+    await krsService.removeClassFromKrsService(krsDetailId);
     successResponse(res, 200, "Class removed from KRS successfully");
   } catch (error) {
     if (error.name === "ZodError") {
@@ -107,14 +106,15 @@ export const getKrsHistory = async (req, res) => {
 export const approveKrs = async (req, res) => {
   try {
     const { krsId } = req.params;
-    const { status, rejectionReason } = approveKrsSchema.parse(req.body);
+    const { status } = approveKrsSchema.parse(req.body);
     const approvedById = req.user.userId;
+    const approvedByRole = req.user.role;
 
     const updatedKrs = await krsService.approveKrsService(
       krsId,
       approvedById,
+      approvedByRole,
       status,
-      rejectionReason,
     );
     successResponse(res, 200, `KRS ${status} successfully`, updatedKrs);
   } catch (error) {
@@ -125,23 +125,51 @@ export const approveKrs = async (req, res) => {
   }
 };
 
+export const rejectKrs = async (req, res) => {
+  try {
+    const { krsId } = req.params;
+    const { rejectionReason } = rejectKrsSchema.parse(req.body);
+    const approvedById = req.user.userId;
+    const approvedByRole = req.user.role;
+
+    const updatedKrs = await krsService.approveKrsService(
+      krsId,
+      approvedById,
+      approvedByRole,
+      "rejected",
+      rejectionReason,
+    );
+
+    successResponse(res, 200, "KRS rejected successfully", updatedKrs);
+  } catch (error) {
+    if (error.name === "ZodError") {
+      return errorResponse(res, 400, "Validation error", error.errors);
+    }
+    errorResponse(res, 400, error.message);
+  }
+};
+
 export const getPendingKrs = async (req, res) => {
   try {
-    const lecturerId = req.user.userId;
+    const userId = req.user.userId;
+    const role = req.user.role;
 
-    // Get lecturer ID from user
-    const lecturerResult = await (
-      await import("../../config/db.js")
-    ).default.query("SELECT id FROM lecturers WHERE user_id = $1", [
-      lecturerId,
-    ]);
+    if (role === "admin") {
+      const pendingKrs = await krsService.getPendingKrsService(null, role);
+      return successResponse(
+        res,
+        200,
+        "Pending KRS retrieved successfully",
+        pendingKrs,
+      );
+    }
 
-    if (lecturerResult.rows.length === 0) {
+    const lecturer = await lecturerRepository.getLecturerByUserId(userId);
+    if (!lecturer) {
       return errorResponse(res, 404, "Lecturer profile not found");
     }
 
-    const lecturer = lecturerResult.rows[0];
-    const pendingKrs = await krsService.getPendingKrsService(lecturer.id);
+    const pendingKrs = await krsService.getPendingKrsService(lecturer.id, role);
     successResponse(res, 200, "Pending KRS retrieved successfully", pendingKrs);
   } catch (error) {
     errorResponse(res, 500, error.message);
