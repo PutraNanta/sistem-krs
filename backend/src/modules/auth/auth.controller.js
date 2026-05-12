@@ -13,7 +13,18 @@ export const login = async (req, res) => {
     if (error.name === "ZodError") {
       return errorResponse(res, 400, "Validation error", error.errors);
     }
-    errorResponse(res, 401, error.message);
+
+    const authFailureMessages = new Set([
+      "User not found",
+      "Invalid password",
+      "User account is inactive",
+    ]);
+
+    if (authFailureMessages.has(error.message)) {
+      return errorResponse(res, 401, error.message);
+    }
+
+    return errorResponse(res, 500, "Login failed", error);
   }
 };
 

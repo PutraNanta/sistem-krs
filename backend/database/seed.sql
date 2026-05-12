@@ -14,38 +14,38 @@ INSERT INTO study_programs (id, code, name, description, max_sks) VALUES
 -- ============================================================================
 -- Admin User
 INSERT INTO users (id, email, password, name, role, is_active) VALUES
-('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'admin@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Admin User', 'admin', true);
+('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'admin@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Admin User', 'admin', true);
 
 -- Lecturer Users
 INSERT INTO users (id, email, password, name, role, is_active) VALUES
-('bbbbbbbb-1111-1111-1111-111111111111', 'lecturer1@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Dr. John Smith', 'lecturer', true),
-('bbbbbbbb-2222-2222-2222-222222222222', 'lecturer2@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Dr. Jane Doe', 'lecturer', true),
-('bbbbbbbb-3333-3333-3333-333333333333', 'lecturer3@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Prof. Michael Brown', 'lecturer', true),
-('bbbbbbbb-4444-4444-4444-444444444444', 'lecturer4@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Prof. Sarah Wilson', 'lecturer', true),
-('bbbbbbbb-5555-5555-5555-555555555555', 'lecturer5@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Dr. Robert Taylor', 'lecturer', true);
+('bbbbbbbb-1111-1111-1111-111111111111', 'lecturer1@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Dr. John Smith', 'lecturer', true),
+('bbbbbbbb-2222-2222-2222-222222222222', 'lecturer2@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Dr. Jane Doe', 'lecturer', true),
+('bbbbbbbb-3333-3333-3333-333333333333', 'lecturer3@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Prof. Michael Brown', 'lecturer', true),
+('bbbbbbbb-4444-4444-4444-444444444444', 'lecturer4@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Prof. Sarah Wilson', 'lecturer', true),
+('bbbbbbbb-5555-5555-5555-555555555555', 'lecturer5@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Dr. Robert Taylor', 'lecturer', true);
 
 -- Student Users
 INSERT INTO users (id, email, password, name, role, is_active) VALUES
-('cccccccc-1111-1111-1111-111111111111', 'student1@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Alice Johnson', 'student', true),
-('cccccccc-2222-2222-2222-222222222222', 'student2@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Bob Miller', 'student', true),
-('cccccccc-3333-3333-3333-333333333333', 'student3@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Carol Davis', 'student', true),
-('cccccccc-4444-4444-4444-444444444444', 'student4@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'David Martinez', 'student', true),
-('cccccccc-5555-5555-5555-555555555555', 'student5@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Emma Garcia', 'student', true),
-('cccccccc-6666-6666-6666-666666666666', 'student6@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Frank Rodriguez', 'student', true),
-('cccccccc-7777-7777-7777-777777777777', 'student7@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Grace Lee', 'student', true),
-('cccccccc-8888-8888-8888-888888888888', 'student8@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Henry White', 'student', true),
-('cccccccc-9999-9999-9999-999999999999', 'student9@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Iris Chen', 'student', true),
-('cccccccc-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'student10@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Jack Anderson', 'student', true),
-('cccccccc-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'student11@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Karen Thomas', 'student', true),
-('cccccccc-cccc-cccc-cccc-cccccccccccc', 'student12@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Leo Jackson', 'student', true),
-('cccccccc-dddd-dddd-dddd-dddddddddddd', 'student13@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Mia White', 'student', true),
-('cccccccc-eeee-eeee-eeee-eeeeeeeeeeee', 'student14@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Noah Harris', 'student', true),
-('cccccccc-ffff-ffff-ffff-ffffffffffff', 'student15@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Olivia Martin', 'student', true),
-('dddddddd-1111-1111-1111-111111111111', 'student16@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Paul Thompson', 'student', true),
-('dddddddd-2222-2222-2222-222222222222', 'student17@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Quinn Garcia', 'student', true),
-('dddddddd-3333-3333-3333-333333333333', 'student18@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Rachel Martinez', 'student', true),
-('dddddddd-4444-4444-4444-444444444444', 'student19@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Sam Robinson', 'student', true),
-('dddddddd-5555-5555-5555-555555555555', 'student20@example.com', '$2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW', 'Tina Clark', 'student', true);
+('cccccccc-1111-1111-1111-111111111111', 'student1@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Alice Johnson', 'student', true),
+('cccccccc-2222-2222-2222-222222222222', 'student2@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Bob Miller', 'student', true),
+('cccccccc-3333-3333-3333-333333333333', 'student3@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Carol Davis', 'student', true),
+('cccccccc-4444-4444-4444-444444444444', 'student4@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'David Martinez', 'student', true),
+('cccccccc-5555-5555-5555-555555555555', 'student5@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Emma Garcia', 'student', true),
+('cccccccc-6666-6666-6666-666666666666', 'student6@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Frank Rodriguez', 'student', true),
+('cccccccc-7777-7777-7777-777777777777', 'student7@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Grace Lee', 'student', true),
+('cccccccc-8888-8888-8888-888888888888', 'student8@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Henry White', 'student', true),
+('cccccccc-9999-9999-9999-999999999999', 'student9@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Iris Chen', 'student', true),
+('cccccccc-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'student10@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Jack Anderson', 'student', true),
+('cccccccc-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'student11@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Karen Thomas', 'student', true),
+('cccccccc-cccc-cccc-cccc-cccccccccccc', 'student12@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Leo Jackson', 'student', true),
+('cccccccc-dddd-dddd-dddd-dddddddddddd', 'student13@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Mia White', 'student', true),
+('cccccccc-eeee-eeee-eeee-eeeeeeeeeeee', 'student14@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Noah Harris', 'student', true),
+('cccccccc-ffff-ffff-ffff-ffffffffffff', 'student15@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Olivia Martin', 'student', true),
+('dddddddd-1111-1111-1111-111111111111', 'student16@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Paul Thompson', 'student', true),
+('dddddddd-2222-2222-2222-222222222222', 'student17@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Quinn Garcia', 'student', true),
+('dddddddd-3333-3333-3333-333333333333', 'student18@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Rachel Martinez', 'student', true),
+('dddddddd-4444-4444-4444-444444444444', 'student19@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Sam Robinson', 'student', true),
+('dddddddd-5555-5555-5555-555555555555', 'student20@example.com', '$2a$12$KbNjB2k75mgd/oTHi3Hv.uJ/qe.7m8tVz9bF1EyBEiQbgh/yTsvs2', 'Tina Clark', 'student', true);
 
 -- ============================================================================
 -- LECTURERS DATA
