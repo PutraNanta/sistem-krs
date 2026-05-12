@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Environment variables (NEVER push secrets!)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build outputs
+dist/
+build/
+.next/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Database backups
+*.sql
+*.dump
+
+# Vercel
+.vercel
+
+# Development
+.cache/
