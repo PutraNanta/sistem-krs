@@ -2,13 +2,16 @@
 node_modules/
 .pnpm-lock.yaml
 yarn.lock
-package-lock.json
 
 # Environment variables (NEVER push secrets!)
 .env
+**/.env
 .env.local
+**/.env.local
 .env.*.local
+**/.env.*.local
 .env.production
+**/.env.production
 
 # IDE
 .vscode/
